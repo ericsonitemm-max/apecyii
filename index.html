@@ -1,1 +1,239 @@
-<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Icons Quiz</title><style>body{  margin:0;  font-family:Arial, sans-serif;  background:linear-gradient(135deg,#1e90ff,#00bfff);  display:flex;  justify-content:center;  align-items:center;  height:100vh;  overflow:hidden;  color:white;  transition:1s;}.cover{  position:absolute;  text-align:center;}.hidden{  opacity:0;  pointer-events:none;  transition:1s;}.welcome{  font-size:22px;  opacity:0;  animation:fadeIn 2s forwards;}.title{  font-size:40px;  font-weight:bold;  margin-top:15px;  opacity:0;  animation:fadeIn 2s forwards;  animation-delay:2s;}.play-btn{  margin-top:30px;  padding:14px 35px;  border:none;  border-radius:30px;  font-size:18px;  font-weight:bold;  cursor:pointer;  background:white;  color:#1e90ff;  transition:0.3s;  opacity:0;  animation:fadeIn 2s forwards;  animation-delay:4s;}.play-btn:hover{  transform:scale(1.1);}@keyframes fadeIn{  to{opacity:1;}}.quiz{  position:absolute;  opacity:0;  transition:1s;  width:100%;  display:flex;  justify-content:center;}.card{  background:rgba(255,255,255,0.15);  backdrop-filter:blur(15px);  padding:30px;  border-radius:20px;  width:90%;  max-width:400px;  text-align:center;}button{  width:100%;  padding:12px;  margin:8px 0;  border:none;  border-radius:12px;  font-weight:bold;  cursor:pointer;  transition:0.2s;}.blue-btn{  background:white;  color:#1e90ff;}.error{  background:#ff4d4d !important;  animation:shake 0.4s;}@keyframes shake{  0%,100%{transform:translateX(0);}  25%{transform:translateX(-8px);}  50%{transform:translateX(8px);}  75%{transform:translateX(-8px);}}.confetti{  position:fixed;  width:8px;  height:8px;  top:-10px;  animation:fall linear forwards;}@keyframes fall{  to{    transform:translateY(110vh) rotate(720deg);  }}</style></head><body><div class="cover" id="cover">  <div class="welcome">Welcome To 💙</div>  <div class="title">ICONS QUIZ</div>  <button class="play-btn" onclick="startQuiz()">PLAY ▶</button></div><div class="quiz" id="quizScreen">  <div class="card" id="quiz"></div></div><script>let step=1;function startQuiz(){  document.getElementById("cover").classList.add("hidden");  document.getElementById("quizScreen").style.opacity=1;  render();}function vibrate(){  if(navigator.vibrate){    navigator.vibrate(200);  }}function confettiBoom(amount){  for(let i=0;i<amount;i++){    let c=document.createElement("div");    c.className="confetti";    c.style.left=Math.random()*100+"vw";    c.style.background=`hsl(${Math.random()*360},100%,50%)`;    c.style.animationDuration=(Math.random()*3+2)+"s";    document.body.appendChild(c);    setTimeout(()=>c.remove(),5000);  }}function checkAnswer(btn,q,val){  if((q===1 && val==='merah')||(q===2 && val==='singa')){    confettiBoom(25);    step++;    render();  }else{    btn.classList.add("error");    vibrate();    setTimeout(()=>btn.classList.remove("error"),400);  }}function render(){  const quiz=document.getElementById("quiz");  if(step===1){    quiz.innerHTML=`    <h2>1. Warna apel? 🍎💙</h2>    <button class="blue-btn" onclick="checkAnswer(this,1,'merah')">Merah</button>    <button class="blue-btn" onclick="checkAnswer(this,1,'biru')">Biru</button>    <button class="blue-btn" onclick="checkAnswer(this,1,'hitam')">Hitam</button>    `;  }  if(step===2){    quiz.innerHTML=`    <h2>2. Hewan pemakan daging? 🦁💙</h2>    <button class="blue-btn" onclick="checkAnswer(this,2,'koala')">Koala</button>    <button class="blue-btn" onclick="checkAnswer(this,2,'sapi')">Sapi</button>    <button class="blue-btn" onclick="checkAnswer(this,2,'singa')">Singa</button>    `;  }  if(step===3){    document.body.style.background="linear-gradient(135deg,#ff69b4,#ff1493)";    quiz.innerHTML=`    <h2>Be my valentine? 💖</h2>    <button onclick="final()">Yes 💕</button>    <button onclick="areYouSure()">No 💔</button>    `;  }  if(step===4){    quiz.innerHTML=`    <h2>Are you sure? 😳💞</h2>    <button onclick="final()">Yes 💖</button>    <button onclick="final()">No 💘</button>    `;  }}function areYouSure(){  step=4;  render();}function final(){  confettiBoom(150);  document.getElementById("quiz").innerHTML=`  <h2>💖 FINALLY YOU BE MY VALENTINE 💕<br>  You must win the prizes 🎁✨</h2>  `;}</script></body></html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Icons Quiz</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:linear-gradient(135deg,#1e90ff,#00bfff);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  overflow:hidden;
+  color:white;
+  transition:1s;
+}
+
+.cover{
+  position:absolute;
+  text-align:center;
+}
+
+.hidden{
+  opacity:0;
+  pointer-events:none;
+  transition:1s;
+}
+
+.welcome{
+  font-size:22px;
+  opacity:0;
+  animation:fadeIn 2s forwards;
+}
+
+.title{
+  font-size:40px;
+  font-weight:bold;
+  margin-top:15px;
+  opacity:0;
+  animation:fadeIn 2s forwards;
+  animation-delay:2s;
+}
+
+.play-btn{
+  margin-top:30px;
+  padding:14px 35px;
+  border:none;
+  border-radius:30px;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+  background:white;
+  color:#1e90ff;
+  transition:0.3s;
+  opacity:0;
+  animation:fadeIn 2s forwards;
+  animation-delay:4s;
+}
+
+.play-btn:hover{
+  transform:scale(1.1);
+}
+
+@keyframes fadeIn{
+  to{opacity:1;}
+}
+
+.quiz{
+  position:absolute;
+  opacity:0;
+  transition:1s;
+  width:100%;
+  display:flex;
+  justify-content:center;
+}
+
+.card{
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(15px);
+  padding:30px;
+  border-radius:20px;
+  width:90%;
+  max-width:400px;
+  text-align:center;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+  border:none;
+  border-radius:12px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.blue-btn{
+  background:white;
+  color:#1e90ff;
+}
+
+.error{
+  background:#ff4d4d !important;
+  animation:shake 0.4s;
+}
+
+@keyframes shake{
+  0%,100%{transform:translateX(0);}
+  25%{transform:translateX(-8px);}
+  50%{transform:translateX(8px);}
+  75%{transform:translateX(-8px);}
+}
+
+.confetti{
+  position:fixed;
+  width:8px;
+  height:8px;
+  top:-10px;
+  animation:fall linear forwards;
+}
+
+@keyframes fall{
+  to{
+    transform:translateY(110vh) rotate(720deg);
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="cover" id="cover">
+  <div class="welcome">Welcome To 💙</div>
+  <div class="title">ICONS QUIZ</div>
+  <button class="play-btn" onclick="startQuiz()">PLAY ▶</button>
+</div>
+
+<div class="quiz" id="quizScreen">
+  <div class="card" id="quiz"></div>
+</div>
+
+<script>
+let step=1;
+
+function startQuiz(){
+  document.getElementById("cover").classList.add("hidden");
+  document.getElementById("quizScreen").style.opacity=1;
+  render();
+}
+
+function vibrate(){
+  if(navigator.vibrate){
+    navigator.vibrate(200);
+  }
+}
+
+function confettiBoom(amount){
+  for(let i=0;i<amount;i++){
+    let c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*100+"vw";
+    c.style.background=`hsl(${Math.random()*360},100%,50%)`;
+    c.style.animationDuration=(Math.random()*3+2)+"s";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),5000);
+  }
+}
+
+function checkAnswer(btn,q,val){
+  if((q===1 && val==='merah')||(q===2 && val==='singa')){
+    confettiBoom(25);
+    step++;
+    render();
+  }else{
+    btn.classList.add("error");
+    vibrate();
+    setTimeout(()=>btn.classList.remove("error"),400);
+  }
+}
+
+function render(){
+  const quiz=document.getElementById("quiz");
+
+  if(step===1){
+    quiz.innerHTML=`
+    <h2>1. Warna apel? 🍎💙</h2>
+    <button class="blue-btn" onclick="checkAnswer(this,1,'merah')">Merah</button>
+    <button class="blue-btn" onclick="checkAnswer(this,1,'biru')">Biru</button>
+    <button class="blue-btn" onclick="checkAnswer(this,1,'hitam')">Hitam</button>
+    `;
+  }
+
+  if(step===2){
+    quiz.innerHTML=`
+    <h2>2. Hewan pemakan daging? 🦁💙</h2>
+    <button class="blue-btn" onclick="checkAnswer(this,2,'koala')">Koala</button>
+    <button class="blue-btn" onclick="checkAnswer(this,2,'sapi')">Sapi</button>
+    <button class="blue-btn" onclick="checkAnswer(this,2,'singa')">Singa</button>
+    `;
+  }
+
+  if(step===3){
+    document.body.style.background="linear-gradient(135deg,#ff69b4,#ff1493)";
+    quiz.innerHTML=`
+    <h2>Be my valentine? 💖</h2>
+    <button onclick="final()">Yes 💕</button>
+    <button onclick="areYouSure()">No 💔</button>
+    `;
+  }
+
+  if(step===4){
+    quiz.innerHTML=`
+    <h2>Are you sure? 😳💞</h2>
+    <button onclick="final()">Yes 💖</button>
+    <button onclick="final()">No 💘</button>
+    `;
+  }
+}
+
+function areYouSure(){
+  step=4;
+  render();
+}
+
+function final(){
+  confettiBoom(150);
+  document.getElementById("quiz").innerHTML=`
+  <h2>💖 FINALLY YOU BE MY VALENTINE 💕<br>
+  You must win the prizes 🎁✨</h2>
+  `;
+}
+</script>
+
+</body>
+</html>
